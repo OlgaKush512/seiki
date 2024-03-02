@@ -1,36 +1,50 @@
 "use client";
 
-import React, { useState } from "react";
-import { analyse } from "../actions";
+import React, { useEffect, useState } from "react";
+import { analyse, analyseFilter } from "../actions";
 import dynamic from "next/dynamic";
 import { Item, seikiData } from "../definitions";
 import ChartBar from "./ChartBar";
 import ChartPie from "./ChartPie";
+import SidePanel from "./SidePanel";
 
 const DinamicMap = dynamic(() => import("./DinamicMap"), { ssr: false });
 
 const Home = () => {
   const [data, setData] = useState<seikiData | null>(null);
   const [selectedAddress, setSelectedAddress] = useState<Item | null>(null);
+  const [filtredData, setFiltredData] = useState<seikiData | null>(null);
 
-  const handleClick2 = async () => {
-    try {
-      const fetchedData = await analyse();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedData = await analyse();
+        setData(fetchedData);
+        console.log(fetchedData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-      console.log(fetchedData);
-      setData(fetchedData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    fetchData();
+  }, []);
 
   const handleAddressClick = (address: Item) => {
     setSelectedAddress(address);
   };
+
+  const handleSubmit = async (formData) => {
+    const fetchedData = await analyseFilter(formData);
+
+    console.log("formData", formData);
+    console.log("fetchedData", fetchedData);
+    setData(fetchedData);
+  };
   return (
     <div>
-      <button onClick={handleClick2}>Button2</button>
-      {data !== null && data.items.length > 0 && (
+      <SidePanel data={data} onSubmit={handleSubmit} />
+      {/* <button onClick={handleClick2}>Button2</button> */}
+      {/* {data !== null && data.items.length > 0 && (
         <>
           {data.items.map((item, index) => (
             <div key={index} onClick={() => handleAddressClick(item)}>
@@ -49,7 +63,7 @@ const Home = () => {
             </div>
           )}
         </>
-      )}
+      )} */}
     </div>
   );
 };

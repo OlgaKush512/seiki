@@ -28,12 +28,6 @@ export const analyse = async () => {
     id: poiId,
     kpi: ["traffic.people_in_a_day.total"],
   };
-
-  // const bodyData = {
-  //   day_type: "WORKING_DAYS",
-  //   gender: "MALE",
-  //   hour: [8, 9, 10],
-  // };
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -41,13 +35,41 @@ export const analyse = async () => {
         "Content-Type": "application/json",
         key: apiKey,
       },
-      body: JSON.stringify({ ...params }),
+      //   body: JSON.stringify({ ...params }),
     });
     const responseData = await response.json();
-    // responseData.items.forEach((item) => {
-    // console.log(JSON.stringify(item.data, null, 2));
-    // console.log(JSON.stringify(responseData.items[1], null, 2));
-    // console.log(responseData);
+    return responseData;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+export const analyseFilter = async (filtres) => {
+  const url =
+    "https://api.seiki.co/v1/poi/analysis?" +
+    new URLSearchParams({ ...filtres }).toString();
+  console.log("url", url);
+  const apiKey =
+    "s8gR0oFyGB21ejrOq1zhADbzuFJYJPc_rvG9tyV_jduSKocjm8hab8EmmUZ6vX8mtxhtjKQ6OrXzCR_Kiv2oqygpUJ5UcBsmHZVnn7pBGlxzv4Ay50gHVfr6tWbHbBLpI5mz_Q";
+  const params = {
+    id: filtres.id,
+  };
+  //   const bodyData = {
+  //     id: filtres.id,
+  //   };
+  console.log("id", filtres);
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        key: apiKey,
+      },
+      //   params: params,
+      //   body: JSON.stringify({ ...bodyData }),
+    });
+    const responseData = await response.json();
+    console.log("data", responseData);
     return responseData;
   } catch (error) {
     console.error("Error:", error);
