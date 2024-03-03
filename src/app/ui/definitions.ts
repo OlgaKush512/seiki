@@ -95,3 +95,15 @@ export type Item = {
 export type seikiData = {
   items: Item[];
 };
+
+export type Filters = {
+  id: string;
+  kpi: string | string[];
+  age: string[];
+  gender: string[];
+  hour: string[];
+  week: string[];
+  dayType: string[];
+  mode: string[];
+  purpose: string[];
+};

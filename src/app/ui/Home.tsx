@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { analyse, analyseFilter } from "../actions";
+import { analyse, analyseFilter } from "../lib/actions";
 import dynamic from "next/dynamic";
-import { Item, seikiData } from "../definitions";
+import { Item, seikiData } from "./definitions";
 import ChartBar from "./ChartBar";
 import ChartPie from "./ChartPie";
 import SidePanel from "./SidePanel";
@@ -38,7 +38,7 @@ const Home = () => {
 
     console.log("formData", formData);
     console.log("fetchedData", fetchedData);
-    setData(fetchedData);
+    setFiltredData(fetchedData);
   };
   return (
     <div>

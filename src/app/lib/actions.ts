@@ -28,52 +28,70 @@ export const analyse = async () => {
     id: poiId,
     kpi: ["traffic.people_in_a_day.total"],
   };
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        key: apiKey,
-      },
-      //   body: JSON.stringify({ ...params }),
-    });
-    const responseData = await response.json();
-    return responseData;
-  } catch (error) {
-    console.error("Error:", error);
-  }
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         key: apiKey,
+  //       },
+  //       //   body: JSON.stringify({ ...params }),
+  //     });
+  //     const responseData = await response.json();
+  //     return responseData;
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  //   const url = "http://www.google.com/";
+  //   try {
+  //     const response = await fetch(url);
+  //     const responseData = await response.text();
+  //     console.log(responseData);
+  //     return responseData;
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
 };
 
-export const analyseFilter = async (filtres) => {
+export const analyseFilter = async (filtres: any) => {
   const url =
     "https://api.seiki.co/v1/poi/analysis?" +
-    new URLSearchParams({ ...filtres }).toString();
+    new URLSearchParams({
+      id: filtres.id,
+      ...(filtres.kpi !== "" && { kpi: filtres.kpi }),
+    }).toString();
   console.log("url", url);
   const apiKey =
     "s8gR0oFyGB21ejrOq1zhADbzuFJYJPc_rvG9tyV_jduSKocjm8hab8EmmUZ6vX8mtxhtjKQ6OrXzCR_Kiv2oqygpUJ5UcBsmHZVnn7pBGlxzv4Ay50gHVfr6tWbHbBLpI5mz_Q";
-  const params = {
-    id: filtres.id,
-  };
-  //   const bodyData = {
+  //   const params = {
   //     id: filtres.id,
   //   };
-  console.log("id", filtres);
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        key: apiKey,
-      },
-      //   params: params,
-      //   body: JSON.stringify({ ...bodyData }),
-    });
-    const responseData = await response.json();
-    console.log("data", responseData);
-    return responseData;
-  } catch (error) {
-    console.error("Error:", error);
-  }
+  const bodyData = {
+    age: filtres.age,
+    gender: filtres.gender,
+    hour: filtres.hour,
+    week: filtres.week,
+    dayType: filtres.dayType,
+    mode: filtres.mode,
+    purpose: filtres.purpose,
+  };
+  console.log("bodyData", bodyData);
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         key: apiKey,
+  //       },
+  //       //   params: params,
+  //       //   body: JSON.stringify({ ...bodyData }),
+  //     });
+  //     const responseData = await response.json();
+  //     // console.log("data", responseData);
+  //     // return responseData;
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
 };
 
 // export const poi = async () => {

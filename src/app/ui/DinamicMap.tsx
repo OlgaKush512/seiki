@@ -3,7 +3,7 @@
 import { Icon } from "leaflet";
 import React, { FC } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { Item } from "../definitions";
+import { Item } from "./definitions";
 import "leaflet/dist/leaflet.css";
 
 interface Props {
