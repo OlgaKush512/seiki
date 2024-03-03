@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { analyse, analyseFilter } from "../lib/actions";
 import dynamic from "next/dynamic";
-import { Item, seikiData } from "./definitions";
+import { Item, seikiData } from "../lib/definitions";
 import ChartBar from "./ChartBar";
 import ChartPie from "./ChartPie";
 import SidePanel from "./SidePanel";

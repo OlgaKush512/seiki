@@ -9,7 +9,7 @@ import {
   Paper,
 } from "@mui/material";
 import { Radio, RadioGroup, FormControlLabel } from "@mui/material";
-import { seikiData } from "./definitions";
+import { seikiData } from "../lib/definitions";
 import FilterSelect from "./filters/FilterSelect";
 
 interface Props {

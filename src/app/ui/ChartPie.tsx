@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { AgChartsReact } from "ag-charts-react";
-import { Item } from "./definitions";
+import { Item } from "../lib/definitions";
 
 interface Props {
   selectedAddress: Item;
