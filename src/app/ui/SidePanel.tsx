@@ -1,4 +1,5 @@
 "use client";
+
 import React, { ChangeEvent, FC, useState } from "react";
 import {
   Select,
@@ -9,12 +10,12 @@ import {
   Paper,
 } from "@mui/material";
 import { Radio, RadioGroup, FormControlLabel } from "@mui/material";
-import { seikiData } from "../lib/definitions";
+import { Filters, seikiData } from "../lib/definitions";
 import FilterSelect from "./filters/FilterSelect";
 
 interface Props {
   data: seikiData | null;
-  onSubmit: (formData: {}) => void;
+  onSubmit: (formData: Filters) => Promise<void>;
 }
 
 const ageOptions = ["15-24", "25-34", "35-49", "50-64", "65-PLUS"];
@@ -36,30 +37,19 @@ const weeks = Array.from({ length: 52 }, (_, index) => (index + 1).toString());
 
 const SidePanel: FC<Props> = ({ data, onSubmit }) => {
   const [selectedLocation, setSelectedLocation] = useState<string>("");
-  const [selectedOption, setSelectedOption] =
-    useState<string>("crossings_in_a_day");
-  const [selectedAge, setSelectedAge] = useState<string[]>([ageOptions[0]]);
-  const [selectedGender, setSelectedGender] = useState<string[]>([
-    genderOptions[0],
-  ]);
+  const [selectedOption, setSelectedOption] = useState<string>("all");
+  const [selectedAge, setSelectedAge] = useState<string[]>(["all"]);
+  const [selectedGender, setSelectedGender] = useState<string[]>(["all"]);
 
-  const [selectedHour, setSelectedHour] = useState<string[]>([
-    hours[0].toString(),
-  ]);
-  const [selectedWeek, setSelectedWeek] = useState<string[]>([
-    weeks[0].toString(),
-  ]);
+  const [selectedHour, setSelectedHour] = useState<string[]>(["all"]);
+  const [selectedWeek, setSelectedWeek] = useState<string[]>(["all"]);
 
-  const [selectedDayType, setSelectedDayType] = useState<string[]>([
-    dayTypes[0],
-  ]);
+  const [selectedDayType, setSelectedDayType] = useState<string[]>(["all"]);
 
-  const [selectedModeType, setSelectedModeType] = useState<string[]>([
-    modeTypes[0],
-  ]);
+  const [selectedModeType, setSelectedModeType] = useState<string[]>(["all"]);
 
   const [selectedTripPurpose, setSelectedTripPurpose] = useState<string[]>([
-    tripPurposeTypes[0],
+    "all",
   ]);
 
   const handleLocationChange = (event: SelectChangeEvent<string>) => {
@@ -74,13 +64,15 @@ const SidePanel: FC<Props> = ({ data, onSubmit }) => {
     const formData = {
       id: selectedLocation,
       kpi: selectedOption === "all" ? "" : selectedOption,
-      age: selectedAge,
-      gender: selectedGender,
-      hour: selectedHour,
-      week: selectedWeek,
-      dayType: selectedDayType,
-      mode: selectedModeType,
-      purpose: selectedTripPurpose,
+      age: selectedAge[0] === "all" ? "" : selectedAge,
+      gender: selectedGender[0] === "all" ? "" : selectedGender,
+      hour:
+        selectedHour[0] === "all" ? "" : selectedHour.map((el) => parseInt(el)),
+      week:
+        selectedWeek[0] === "all" ? "" : selectedWeek.map((el) => parseInt(el)),
+      dayType: selectedDayType[0] === "all" ? "" : selectedDayType,
+      mode: selectedModeType[0] === "all" ? "" : selectedModeType,
+      purpose: selectedTripPurpose[0] === "all" ? "" : selectedTripPurpose,
     };
     onSubmit(formData);
   };
@@ -110,12 +102,12 @@ const SidePanel: FC<Props> = ({ data, onSubmit }) => {
       </Select>
       <RadioGroup value={selectedOption} onChange={handleOptionChange}>
         <FormControlLabel
-          value="crossings_in_a_day"
+          value="traffic.crossings_in_a_day"
           control={<Radio />}
           label="Crossings in a Day"
         />
         <FormControlLabel
-          value="people_in_a_day"
+          value="traffic.people_in_a_day"
           control={<Radio />}
           label="People in a Day"
         />

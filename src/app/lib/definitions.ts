@@ -64,6 +64,7 @@ type CrossingOrPeopleInDay = {
   total: number;
   trip_purpose_breakdown: TripPurposeBreakdown;
   week_ratio: WeekRatio;
+  [key: string]: any;
 };
 
 type Traffic = {
@@ -99,11 +100,11 @@ export type seikiData = {
 export type Filters = {
   id: string;
   kpi: string | string[];
-  age: string[];
-  gender: string[];
-  hour: string[];
-  week: string[];
-  dayType: string[];
-  mode: string[];
-  purpose: string[];
+  age: string | string[];
+  gender: string | string[];
+  hour: string | number[];
+  week: string | number[];
+  dayType: string | string[];
+  mode: string | string[];
+  purpose: string | string[];
 };

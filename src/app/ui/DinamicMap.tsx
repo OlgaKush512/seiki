@@ -15,7 +15,7 @@ const DinamicMap: FC<Props> = ({ selectedAddress }) => {
     <MapContainer
       center={[selectedAddress.lat, selectedAddress.lng]}
       zoom={15}
-      style={{ height: "400px", width: "100%", border: "solid" }}
+      style={{ height: "400px", width: "400px", border: "solid" }}
     >
       <TileLayer
         url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -34,7 +34,12 @@ const DinamicMap: FC<Props> = ({ selectedAddress }) => {
         <Popup>
           <div>
             <p>ID: {selectedAddress.id}</p>
-            <p>Address: {selectedAddress.address}</p>
+            <p>
+              Address:{" "}
+              {selectedAddress.address === null
+                ? "Default address"
+                : selectedAddress.address}
+            </p>
           </div>
         </Popup>
       </Marker>
