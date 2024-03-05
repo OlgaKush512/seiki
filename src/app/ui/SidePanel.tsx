@@ -80,7 +80,7 @@ const SidePanel: FC<Props> = ({ data, onSubmit }) => {
     <Paper
       sx={{
         width: "300px",
-        height: "100vh",
+        height: "100%",
         backgroundColor: "#bbb3b3",
         color: "#fff",
         padding: "20px",
@@ -90,6 +90,7 @@ const SidePanel: FC<Props> = ({ data, onSubmit }) => {
     >
       <Select
         fullWidth
+        defaultValue={data?.items[0].id}
         value={selectedLocation}
         onChange={handleLocationChange}
       >

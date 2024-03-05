@@ -46,7 +46,6 @@ const Home = () => {
   console.log("formData?.kpi", formData?.kpi);
   return (
     <div>
-      {/* <Stack direction="row" sx={{ border: "solid" }}> */}
       <SidePanel data={data} onSubmit={handleSubmit} />
       {filtredData !== null && (
         <div>
@@ -130,20 +129,21 @@ const Home = () => {
               )}
             </div>
             <Box
-              sx={{ border: "solid", width: "100%" }}
+              sx={{ width: "100%" }}
               display="flex"
               justifyContent="center"
               alignItems="center"
             >
-              <DinamicMap
-                key={filtredData.items[0].id}
-                selectedAddress={filtredData.items[0]}
-              />
+              {filtredData && (
+                <DinamicMap
+                  key={filtredData?.items[0]?.id}
+                  selectedAddress={filtredData.items[0]}
+                />
+              )}
             </Box>
           </Stack>
         </div>
       )}
-      {/* </Stack> */}
     </div>
   );
 };

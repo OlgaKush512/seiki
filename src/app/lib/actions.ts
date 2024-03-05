@@ -2,10 +2,12 @@
 
 export const analyse = async () => {
   const url = "https://api.seiki.co/v1/poi/analysis";
-  const apiKey =
-    "s8gR0oFyGB21ejrOq1zhADbzuFJYJPc_rvG9tyV_jduSKocjm8hab8EmmUZ6vX8mtxhtjKQ6OrXzCR_Kiv2oqygpUJ5UcBsmHZVnn7pBGlxzv4Ay50gHVfr6tWbHbBLpI5mz_Q";
+  const apiKey = process.env.API_KEY;
 
   try {
+    if (!apiKey) {
+      throw new Error("API key is not defined");
+    }
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -28,8 +30,7 @@ export const analyseFilter = async (filtres: any) => {
       ...(filtres.kpi !== "" && { kpi: filtres.kpi }),
     }).toString();
   console.log("url", url);
-  const apiKey =
-    "s8gR0oFyGB21ejrOq1zhADbzuFJYJPc_rvG9tyV_jduSKocjm8hab8EmmUZ6vX8mtxhtjKQ6OrXzCR_Kiv2oqygpUJ5UcBsmHZVnn7pBGlxzv4Ay50gHVfr6tWbHbBLpI5mz_Q";
+  const apiKey = process.env.API_KEY;
 
   const bodyData = {
     ...(filtres.age !== "" && { age: filtres.age }),
@@ -42,6 +43,9 @@ export const analyseFilter = async (filtres: any) => {
   };
   console.log("bodyData", JSON.stringify(bodyData));
   try {
+    if (!apiKey) {
+      throw new Error("API key is not defined");
+    }
     const response = await fetch(url, {
       method: "POST",
       headers: {
