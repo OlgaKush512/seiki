@@ -18,7 +18,7 @@ const DinamicMap: FC<Props> = ({ selectedAddress }) => {
       style={{
         height: "580px",
         width: "580px",
-        border: " solid 4px #5f4ddd",
+        border: " solid 2px #5f4ddd",
         borderRadius: "4px",
       }}
     >
