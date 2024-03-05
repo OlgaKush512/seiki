@@ -80,7 +80,7 @@ const Home = () => {
                   value={selectedTab}
                   onChange={handleTabChange}
                   aria-label="Charts tabs"
-                  sx={{ mb: 10 }}
+                  sx={{ mb: 5, ml: 10 }}
                 >
                   <Tab value="ages" label="AGE" />
                   <Tab value="gender" label="GENDER" />

@@ -29,7 +29,6 @@ export const analyseFilter = async (filtres: any) => {
       id: filtres.id,
       ...(filtres.kpi !== "" && { kpi: filtres.kpi }),
     }).toString();
-  console.log("url", url);
   const apiKey = process.env.API_KEY;
 
   const bodyData = {
@@ -41,7 +40,6 @@ export const analyseFilter = async (filtres: any) => {
     ...(filtres.mode !== "" && { mode: filtres.mode }),
     ...(filtres.purpose !== "" && { trip_purpose: filtres.purpose }),
   };
-  console.log("bodyData", JSON.stringify(bodyData));
   try {
     if (!apiKey) {
       throw new Error("API key is not defined");
