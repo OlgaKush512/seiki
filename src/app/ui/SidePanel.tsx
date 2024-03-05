@@ -8,6 +8,7 @@ import {
   SelectChangeEvent,
   Stack,
   Paper,
+  Typography,
 } from "@mui/material";
 import { Radio, RadioGroup, FormControlLabel } from "@mui/material";
 import { Filters, seikiData } from "../lib/definitions";
@@ -80,19 +81,19 @@ const SidePanel: FC<Props> = ({ data, onSubmit }) => {
     <Paper
       sx={{
         width: "300px",
-        height: "100%",
-        backgroundColor: "#bbb3b3",
-        color: "#fff",
+        height: "91vh",
         padding: "20px",
         boxSizing: "border-box",
         float: "left",
       }}
     >
+      <Typography variant="caption">Address</Typography>
       <Select
         fullWidth
-        defaultValue={data?.items[0].id}
+        defaultValue={data?.items[0]?.id}
         value={selectedLocation}
         onChange={handleLocationChange}
+        size="small"
       >
         {data &&
           data.items.map((el, index) => (

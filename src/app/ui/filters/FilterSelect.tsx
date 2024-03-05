@@ -32,7 +32,7 @@ const FilterSelect: FC<Props> = ({ options, selected, setter, label }) => {
   return (
     <>
       <Typography variant="caption">{label}</Typography>
-      <Select multiple value={selected} onChange={handleChange}>
+      <Select multiple value={selected} onChange={handleChange} size="small">
         <MenuItem key="all" value={"all"}>
           All
         </MenuItem>

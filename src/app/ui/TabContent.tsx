@@ -44,9 +44,9 @@ const TabContent: FC<Props> = ({
     );
 
   return (
-    <Stack direction="row">
+    <Stack direction="row" spacing={5}>
       {formData?.kpi !== "traffic.people_in_a_day" && (
-        <div>
+        <Stack spacing={2}>
           <GraphBar
             names={namesCrossings}
             values={valuesCrossing}
@@ -59,10 +59,10 @@ const TabContent: FC<Props> = ({
             key={labelCrossing}
             label={labelCrossing}
           />
-        </div>
+        </Stack>
       )}
       {formData?.kpi !== "traffic.crossings_in_a_day" && (
-        <div>
+        <Stack spacing={2}>
           <GraphBar
             names={namesPeople}
             values={valuesPeople}
@@ -75,7 +75,7 @@ const TabContent: FC<Props> = ({
             key={labelPeople}
             label={labelPeople}
           />
-        </div>
+        </Stack>
       )}
     </Stack>
   );
